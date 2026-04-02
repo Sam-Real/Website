@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoLeadRealty - Share Link</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .link-box { background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 20px 0; text-align: center; }
+        .link { font-size: 18px; color: #1976d2; word-break: break-all; }
+        button { background: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #45a049; }
+        .preview { border: 1px solid #ddd; margin-top: 20px; height: 400px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 GoLeadRealty Website</h1>
+        <div class="link-box">
+            <p><strong>Share this link with your friends:</strong></p>
+            <div class="link" id="shareLink">https://htmlpreview.github.io/?https://raw.githubusercontent.com/htmlpreview/htmlpreview.github.io/master/index.html</div>
+            <button onclick="copyLink()">📋 Copy Link</button>
+        </div>
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Click the "Copy Link" button above</li>
+            <li>Share this link on WhatsApp</li>
+            <li>Your friend can click it to view your website</li>
+        </ol>
+        <iframe class="preview" src="index.html" width="100%"></iframe>
+    </div>
+
+    <script>
+        function copyLink() {
+            const link = document.getElementById('shareLink');
+            navigator.clipboard.writeText(link.textContent).then(() => {
+                alert('Link copied! Share it on WhatsApp 📱');
+            });
+        }
+    </script>
+</body>
+</html>

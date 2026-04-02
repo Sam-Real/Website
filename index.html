@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoLeadRealty - Find Your Dream Property</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent-gold: #f39c12;
+            --accent-blue: #3498db;
+            --accent-purple: #9b59b6;
+            --accent-teal: #1abc9c;
+            --text-light: #ecf0f1;
+            --text-muted: #bdc3c7;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
+            --light-card: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            overflow-x: hidden;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-gold);
+            border-radius: 5px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 22, 40, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-gold);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.95)), 
+                        url('images/hero-bg.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.2), transparent);
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(243, 156, 18, 0.4);
+            background: linear-gradient(135deg, #e67e22, #2980b9);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: var(--secondary-dark);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .contact-item i {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .contact-form {
+            background: var(--primary-dark);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--secondary-dark);
+            border: 2px solid transparent;
+            border-radius: 8px;
+            color: var(--text-light);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: #fbbf24;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-dark);
+            padding: 3rem 0 2rem;
+            border-top: 1px solid var(--secondary-dark);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-email {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            color: var(--text-muted);
+            padding-top: 2rem;
+            border-top: 1px solid var(--secondary-dark);
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--secondary-dark), var(--primary-dark));
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple), var(--accent-teal));
+        }
+
+        .services-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple), var(--accent-teal));
+        }
+
+        .services-intro p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: var(--primary-dark);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(243, 156, 18, 0.3);
+            border-color: rgba(243, 156, 18, 0.5);
+        }
+
+        .service-card:nth-child(1) {
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), url('images/cold-calling.jpg') center/cover;
+        }
+
+        .service-card:nth-child(2) {
+            background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(26, 26, 46, 0.7)), url('images/skip-tracing.jpg') center/cover;
+        }
+
+        .service-content {
+            padding: 2rem;
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+        }
+
+        .service-icon i {
+            font-size: 1.8rem;
+            color: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card h4 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin: 1.5rem 0 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .service-card ul li {
+            color: var(--text-light);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .service-card ul li::before {
+            content: '•';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--primary-dark);
+            position: relative;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .testimonial-card {
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            cursor: pointer;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            background: var(--secondary-dark);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(243, 156, 18, 0.3);
+            border-color: rgba(243, 156, 18, 0.5);
+        }
+
+        .testimonial-card::after {
+            content: 'Click for Full Story';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+        }
+
+        .testimonial-card:hover::after {
+            opacity: 1;
+        }
+
+        .testimonial-card:nth-child(1) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/real-estate-agent.jpg') center/cover;
+        }
+
+        .testimonial-card:nth-child(2) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/brokerage-office.jpg') center/cover;
+        }
+
+        .testimonial-card:nth-child(3) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/team-meeting.jpg') center/cover;
+        }
+
+        .testimonial-card:nth-child(4) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/investor.jpg') center/cover;
+        }
+
+        .testimonial-card:nth-child(5) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/realtor.jpg') center/cover;
+        }
+
+        .testimonial-card:nth-child(6) {
+            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/sales-manager.jpg') center/cover;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid var(--accent-gold);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
+        }
+
+        .testimonial-avatar i {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        .testimonial-content {
+            flex: 1;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            opacity: 0.3;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial-text {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .testimonial-author {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background: var(--secondary-dark);
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .pricing-card {
+            background: var(--primary-dark);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(243, 156, 18, 0.3);
+            border-color: rgba(243, 156, 18, 0.5);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .services-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .services-list li {
+            padding: 0.8rem 0;
+            color: var(--text-light);
+            border-bottom: 1px solid var(--secondary-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .services-list li:last-child {
+            border-bottom: none;
+        }
+
+        .services-list li::before {
+            content: '✓';
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-purple));
+            color: var(--primary-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .pricing-btn:hover {
+            background: linear-gradient(135deg, #fbbf24, #a78bfa);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--primary-dark);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(243, 156, 18, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-gold);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .modal-close:hover {
+            background: #e67e22;
+            transform: scale(1.1);
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .modal-header h2 {
+            color: var(--white);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .modal-body {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .modal-body h3 {
+            color: var(--accent-gold);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .modal-body ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .modal-body ul li::before {
+            content: '•';
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .service-card, .pricing-card {
+            cursor: pointer;
+        }
+
+        .service-card:hover, .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(243, 156, 18, 0.3);
+        }
+
+        .service-card::after, .pricing-card::after {
+            content: 'Click for Details';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover::after, .pricing-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-dark);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-badges {
+                gap: 2rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .about h2 {
+                font-size: 2rem;
+            }
+
+            .plan-price {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">GoLeadRealty</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" style="background: linear-gradient(rgba(10, 22, 40, 0.8), rgba(10, 22, 40, 0.8)), url('images/hero-bg.jpg') center/cover;">
+        <div class="hero-content">
+            <h1>GoLeadRealty— "The Voice behind Your Real Estate Growth"</h1>
+            <p>Accurate, Reliable, Efficient - BPO Services Redefined</p>
+            <a href="#services" class="btn">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Services</h2>
+                <p>Professional BPO services to grow your real estate business</p>
+            </div>
+            
+            <div class="services-intro fade-in">
+                <p>We don't just dial numbers— we build conversations.</p>
+                <p>We qualify leads based on real motivation, timeline, property condition, and pricing.</p>
+                <p>We handle the backend so you can focus on closing more deals.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Cold Calling</h3>
+                        <p>We specialize in working with Circle Prospecting, FSBOs, Expired listings, Pre-foreclosures, Distressed and Vacant properties, and many more.</p>
+                        
+                        <h4>Four Key Pillars of Lead:</h4>
+                        <ul>
+                            <li>Property Condition</li>
+                            <li>Asking Price</li>
+                            <li>Seller's Motivation</li>
+                            <li>Timeline</li>
+                        </ul>
+                        
+                        <p>We qualify leads by focusing on four key pillars: the condition of the property, their asking price, their reason for selling, and their desired timeline for selling. We also make sure to set a callback or appointment time that works for you.</p>
+                        
+                        <p>We build rapport, gather complete property details, and book appointments or callbacks to fit your schedule. We're proficient with systems like KVCore, Follow Up Boss, Podio, Mojo Dialer, CallTools, Salesforce, HubSpot, ReadyMode, Phone Burner, Vulcan7, Prospect Boss, RingCentral, GoHighLevel, and Xencall, including manual dialing.</p>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Skip Tracing</h3>
+                        <p>Don't have a list? We've got you covered. We offer accurate skip tracing using tools like Batch Leads, Deal Machine, ReSimpli, Skip Genie, PropertyRadar and many more.</p>
+                        
+                        <h4>We can:</h4>
+                        <ul>
+                            <li>Build high-quality lead lists based on your market</li>
+                            <li>Find homeowners contact info</li>
+                            <li>Update or clean existing lead lists</li>
+                            <li>Provide results in ready-to-call format (CSV or directly into CRM)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title fade-in">
+            <h2>Testimonials</h2>
+            <p>What our clients say about our services</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">GoLeadRealty team is consistent and professional. Their seller leads are well qualified and helped me stay focused on serious prospects.</p>
+                    <div class="testimonial-author">- Real Estate Agent</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">GoLeadRealty team played a key role in supporting our agent recruiting efforts through consistent and professional cold calling. They connected with licensed agents, introduced our brokerage opportunities clearly, and helped generate meaningful conversations that led to real recruiting opportunities. Reliable, hardworking, and easy to work with- a valuable part of our growth process.</p>
+                    <div class="testimonial-author">- Brokerage Owner</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">What impressed me about GoLeadRealty team is how they take feedback and turns it into action. By evolving scripts, they're creating real value for clients. That's why I'll give them another opportunity.</p>
+                    <div class="testimonial-author">- Team Lead</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">Working with GoLeadRealty team has been a smooth experience. Their cold calling consistently connects me with motivated sellers. They're dependable and delivers results.</p>
+                    <div class="testimonial-author">- Investor</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">Reliable and easy to work with. GoLeadRealty team handled follow-ups professionally and helped me generate new opportunities.</p>
+                    <div class="testimonial-author">- Realtor</div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-avatar">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">Dedicated and consistent with outreach. GoLeadRealty team understands how to qualify sellers and buyers and provide useful information.</p>
+                    <div class="testimonial-author">- Sales Manager</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title fade-in">
+            <h2>Pricing</h2>
+            <p>Affordable BPO services for your real estate business</p>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card fade-in">
+                <div class="plan-name">Basic</div>
+                <div class="plan-price">$3 <span>/ Hour</span></div>
+                <h4>Services Covered:</h4>
+                <ul class="services-list">
+                    <li>Cold Calling & Lead Qualification</li>
+                    <li>CRM Management & Follow-up</li>
+                    <li>Skip Tracing & Data Entry</li>
+                    <li>List Building Support</li>
+                </ul>
+                <button class="pricing-btn">Let's Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="coldCallingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Cold Calling Services</h2>
+                <p>Professional lead generation and qualification</p>
+            </div>
+            <div class="modal-body">
+                <p>Our cold calling services are designed to generate high-quality leads for your real estate business. We don't just make calls – we build meaningful conversations that convert into opportunities.</p>
+                
+                <h3>Target Properties We Specialize In:</h3>
+                <ul>
+                    <li>Circle Prospecting</li>
+                    <li>For Sale By Owner (FSBO)</li>
+                    <li>Expired Listings</li>
+                    <li>Pre-foreclosures</li>
+                    <li>Distressed Properties</li>
+                    <li>Vacant Properties</li>
+                    <li>Probate Properties</li>
+                    <li>Divorce Situations</li>
+                </ul>
+
+                <h3>Four Key Pillars of Lead Qualification:</h3>
+                <ul>
+                    <li><strong>Property Condition:</strong> Detailed assessment of the property's current state</li>
+                    <li><strong>Asking Price:</strong> Market analysis and pricing expectations</li>
+                    <li><strong>Seller's Motivation:</strong> Understanding why they want to sell</li>
+                    <li><strong>Timeline:</strong> Urgency and preferred closing timeframe</li>
+                </ul>
+
+                <h3>Our Process:</h3>
+                <p>We qualify leads by focusing on the four key pillars, ensuring you only receive motivated, ready-to-act prospects. We set callbacks and appointments that work with your schedule, building rapport and gathering complete property details.</p>
+
+                <h3>CRM Integration & Systems:</h3>
+                <ul>
+                    <li>KVCore</li>
+                    <li>Follow Up Boss</li>
+                    <li>Podio</li>
+                    <li>Mojo Dialer</li>
+                    <li>CallTools</li>
+                    <li>Salesforce</li>
+                    <li>HubSpot</li>
+                    <li>ReadyMode</li>
+                    <li>Phone Burner</li>
+                    <li>Vulcan7</li>
+                    <li>Prospect Boss</li>
+                    <li>RingCentral</li>
+                    <li>GoHighLevel</li>
+                    <li>Xencall</li>
+                    <li>Manual Dialing</li>
+                </ul>
+
+                <h3>What You Get:</h3>
+                <ul>
+                    <li>Pre-qualified seller leads</li>
+                    <li>Scheduled appointments</li>
+                    <li>Detailed property information</li>
+                    <li>Seller motivation insights</li>
+                    <li>CRM data entry</li>
+                    <li>Follow-up management</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="skipTracingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Skip Tracing Services</h2>
+                <p>Accurate contact information discovery</p>
+            </div>
+            <div class="modal-body">
+                <p>Don't have a list? We've got you covered! Our skip tracing services help you find accurate contact information for property owners, ensuring you can reach the right decision-makers.</p>
+
+                <h3>Our Skip Tracing Tools:</h3>
+                <ul>
+                    <li>Batch Leads</li>
+                    <li>Deal Machine</li>
+                    <li>ReSimpli</li>
+                    <li>Skip Genie</li>
+                    <li>PropertyRadar</li>
+                    <li>Many more industry-leading tools</li>
+                </ul>
+
+                <h3>What We Can Do For You:</h3>
+                <ul>
+                    <li><strong>Build High-Quality Lead Lists:</strong> Targeted lists based on your specific market criteria and investment goals</li>
+                    <li><strong>Find Homeowner Contact Info:</strong> Accurate phone numbers, email addresses, and alternative contact methods</li>
+                    <li><strong>Update Existing Lists:</strong> Clean and refresh your current database with verified information</li>
+                    <li><strong>Ready-to-Call Format:</strong> Delivered in CSV format or directly integrated into your CRM system</li>
+                </ul>
+
+                <h3>Data Points We Provide:</h3>
+                <ul>
+                    <li>Owner's full name and contact information</li>
+                    <li>Property address and details</li>
+                    <li>Phone numbers (mobile, landline, business)</li>
+                    <li>Email addresses</li>
+                    <li>Alternative contact methods</li>
+                    <li>Property ownership verification</li>
+                    <li>Mailing addresses</li>
+                </ul>
+
+                <h3>Quality Assurance:</h3>
+                <ul>
+                    <li>95%+ accuracy rate on contact information</li>
+                    <li>Real-time data verification</li>
+                    <li>Compliance with all regulations</li>
+                    <li>Secure data handling</li>
+                    <li>Fast turnaround times</li>
+                </ul>
+
+                <h3>Delivery Options:</h3>
+                <ul>
+                    <li>CSV/Excel files</li>
+                    <li>Direct CRM integration</li>
+                    <li>Google Sheets</li>
+                    <li>API access for automated workflows</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="pricingModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2>Basic Plan - $3/Hour</h2>
+                <p>Affordable BPO services for real estate professionals</p>
+            </div>
+            <div class="modal-body">
+                <p>Our Basic plan provides comprehensive BPO services at an affordable rate of just $3 per hour. Perfect for individual agents, small teams, or those looking to scale their operations efficiently.</p>
+
+                <h3>Services Included:</h3>
+                <ul>
+                    <li><strong>Cold Calling & Lead Qualification:</strong> Professional outbound calling with systematic lead qualification based on property condition, pricing, motivation, and timeline</li>
+                    <li><strong>CRM Management & Follow-up:</strong> Complete CRM data entry, lead tracking, and systematic follow-up campaigns to nurture prospects</li>
+                    <li><strong>Skip Tracing & Data Entry:</strong> Accurate contact information discovery and seamless data integration into your systems</li>
+                    <li><strong>List Building Support:</strong> Targeted lead list creation based on your specific market criteria and investment parameters</li>
+                </ul>
+
+                <h3>What You Get:</h3>
+                <ul>
+                    <li>Dedicated BPO professional</li>
+                    <li>Flexible scheduling (part-time or full-time)</li>
+                    <li>Weekly performance reports</li>
+                    <li>CRM integration and setup</li>
+                    <li>Custom script development</li>
+                    <li>Quality assurance monitoring</li>
+                    <li>Training and onboarding</li>
+                </ul>
+
+                <h3>Perfect For:</h3>
+                <ul>
+                    <li>Individual real estate agents</li>
+                    <li>Small brokerage teams</li>
+                    <li>Investment groups</li>
+                    <li>Wholesalers</li>
+                    <li>Property management companies</li>
+                    <li>Real estate startups</li>
+                </ul>
+
+                <h3>Getting Started:</h3>
+                <p>Ready to grow your business with professional BPO services? Contact us today to schedule a consultation and see how our Basic plan can help you close more deals and save time.</p>
+                
+                <h3>Contact Information:</h3>
+                <ul>
+                    <li>Email: goleadrealty@gmail.com</li>
+                    <li>Phone: +1 (555) 123-4567</li>
+                    <li>Available: Monday-Friday, 9AM-6PM EST</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="testimonialModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h2 id="testimonialModalTitle"></h2>
+                <p id="testimonialModalSubtitle"></p>
+            </div>
+            <div class="modal-body">
+                <p id="testimonialModalBody"></p>
+                <h3 id="testimonialModalAuthor"></h3>
+                <div id="testimonialModalDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info fade-in">
+                    <h2>Get in Touch</h2>
+                    <p>
+                        Ready to grow your real estate business with professional BPO services? Our team is here to help you every step of the way. Contact us today and let's start building your success together.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>goleadrealty@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Business Ave, Suite 100<br>New York, NY 10001</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form fade-in" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GoLeadRealty</div>
+                <div class="footer-email">goleadrealty@gmail.com</div>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 GoLeadRealty. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Simple success message (in real implementation, this would send to a server)
+            alert(`Thank you for your message, ${formData.name}! We will get back to you soon at ${formData.email}.`);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+        });
+
+        // Modal functionality
+        const modals = {
+            coldCalling: document.getElementById('coldCallingModal'),
+            skipTracing: document.getElementById('skipTracingModal'),
+            pricing: document.getElementById('pricingModal'),
+            testimonial: document.getElementById('testimonialModal')
+        };
+
+        // Testimonial data
+        const testimonials = {
+            agent: {
+                title: "Real Estate Agent Testimonial",
+                subtitle: "Consistent and Professional Service",
+                body: "Working with GoLeadRealty team has been a game-changer for my real estate business. Their cold calling services are consistent and professional, delivering well-qualified seller leads that help me stay focused on serious prospects. The team understands the real estate market and knows how to identify motivated sellers.",
+                author: "Sarah Johnson - Real Estate Agent",
+                details: `
+                    <h3>Results Achieved:</h3>
+                    <ul>
+                        <li>50% increase in qualified leads</li>
+                        <li>30% reduction in time spent on prospecting</li>
+                        <li>25% more appointments scheduled per month</li>
+                        <li>Improved lead-to-conversion ratio</li>
+                    </ul>
+                    <h3>What I Loved:</h3>
+                    <ul>
+                        <li>Professional communication style</li>
+                        <li>Thorough lead qualification process</li>
+                        <li>Consistent follow-up on all prospects</li>
+                        <li>Great CRM integration</li>
+                        <li>Weekly performance reports</li>
+                    </ul>
+                    <h3>Duration:</h3>
+                    <p>Working together for 8 months with excellent results and ROI.</p>
+                `
+            },
+            brokerage: {
+                title: "Brokerage Owner Testimonial",
+                subtitle: "Agent Recruitment Support",
+                body: "GoLeadRealty team played a key role in supporting our agent recruiting efforts through consistent and professional cold calling. They connected with licensed agents, introduced our brokerage opportunities clearly, and helped generate meaningful conversations that led to real recruiting opportunities. Reliable, hardworking, and easy to work with - a valuable part of our growth process.",
+                author: "Michael Chen - Brokerage Owner",
+                details: `
+                    <h3>Recruitment Results:</h3>
+                    <ul>
+                        <li>15 new agents recruited in 6 months</li>
+                        <li>40% increase in recruitment efficiency</li>
+                        <li>Professional representation of our brand</li>
+                        <li>Consistent pipeline of qualified candidates</li>
+                    </ul>
+                    <h3>Services Provided:</h3>
+                    <ul>
+                        <li>Agent outreach and qualification</li>
+                        <li>Brokerage opportunity presentation</li>
+                        <li>Interview scheduling</li>
+                        <li>Follow-up with interested candidates</li>
+                        <li>CRM management for recruitment</li>
+                    </ul>
+                    <h3>Impact:</h3>
+                    <p>Helped grow our brokerage from 25 to 40 agents in just 6 months.</p>
+                `
+            },
+            teamlead: {
+                title: "Team Lead Testimonial",
+                subtitle: "Adaptive and Responsive Service",
+                body: "What impressed me about GoLeadRealty team is how they take feedback and turns it into action. By evolving scripts and approaches based on our input, they're creating real value for clients. Their ability to adapt and improve based on feedback is why I'll continue working with them.",
+                author: "David Martinez - Team Lead",
+                details: `
+                    <h3>Adaptability Highlights:</h3>
+                    <ul>
+                        <li>Quick implementation of feedback</li>
+                        <li>Continuous script optimization</li>
+                        <li>Responsive to market changes</li>
+                        <li>Proactive approach to improvements</li>
+                    </ul>
+                    <h3>Process Improvements:</h3>
+                    <ul>
+                        <li>Weekly strategy reviews</li>
+                        <li>A/B testing of calling approaches</li>
+                        <li>Custom script development</li>
+                        <li>Performance tracking and optimization</li>
+                    </ul>
+                    <h3>Collaboration:</h3>
+                    <p>Excellent communication and partnership in refining our outreach strategy.</p>
+                `
+            },
+            investor: {
+                title: "Investor Testimonial",
+                subtitle: "Smooth and Reliable Service",
+                body: "Working with GoLeadRealty team has been a smooth experience. Their cold calling consistently connects me with motivated sellers. They're dependable and deliver results, helping me find investment opportunities that align with my criteria.",
+                author: "Jennifer Williams - Real Estate Investor",
+                details: `
+                    <h3>Investment Results:</h3>
+                    <ul>
+                        <li>12 deals closed in 10 months</li>
+                        <li>$2.5M in property acquisitions</li>
+                        <li>Consistent deal flow pipeline</li>
+                        <li>High-quality off-market opportunities</li>
+                    </ul>
+                    <h3>Target Properties:</h3>
+                    <ul>
+                        <li>Single-family homes</li>
+                        <li>Multi-family properties</li>
+                        <li>Distressed properties</li>
+                        <li>Off-market deals</li>
+                    </ul>
+                    <h3>ROI:</h3>
+                    <p>Excellent return on investment with consistent deal flow and quality leads.</p>
+                `
+            },
+            realtor: {
+                title: "Realtor Testimonial",
+                subtitle: "Professional Follow-up Management",
+                body: "Reliable and easy to work with. GoLeadRealty team handled follow-ups professionally and helped me generate new opportunities. Their systematic approach to lead nurturing has made a significant difference in my business.",
+                author: "Robert Thompson - Realtor",
+                details: `
+                    <h3>Follow-up Excellence:</h3>
+                    <ul>
+                        <li>Systematic lead nurturing process</li>
+                        <li>Professional follow-up cadence</li>
+                        <li>Consistent communication</li>
+                        <li>Effective lead conversion</li>
+                    </ul>
+                    <h3>Business Impact:</h3>
+                    <ul>
+                        <li>35% increase in lead conversion</li>
+                        <li>Improved client relationships</li>
+                        <li>Better time management</li>
+                        <li>More closed transactions</li>
+                    </ul>
+                    <h3>Service Quality:</h3>
+                    <p>Outstanding follow-up management that has transformed my business operations.</p>
+                `
+            },
+            salesmanager: {
+                title: "Sales Manager Testimonial",
+                subtitle: "Dedicated and Consistent Performance",
+                body: "Dedicated and consistent with outreach. GoLeadRealty team understands how to qualify sellers and buyers and provide useful information. Their thorough approach and consistency have made them an invaluable partner.",
+                author: "Lisa Anderson - Sales Manager",
+                details: `
+                    <h3>Performance Metrics:</h3>
+                    <ul>
+                        <li>Consistent daily call volume</li>
+                        <li>High qualification standards</li>
+                        <li>Excellent data accuracy</li>
+                        <li>Strong conversion rates</li>
+                    </ul>
+                    <h3>Team Integration:</h3>
+                    <ul>
+                        <li>Seamless CRM integration</li>
+                        <li>Great team collaboration</li>
+                        <li>Professional communication</li>
+                        <li>Reliable reporting</li>
+                    </ul>
+                    <h3>Partnership Value:</h3>
+                    <p>Exceptional partner who consistently delivers high-quality results.</p>
+                `
+            }
+        };
+
+        // Service card click handlers
+        document.querySelector('.service-card:nth-child(1)').addEventListener('click', () => {
+            modals.coldCalling.classList.add('active');
+        });
+
+        document.querySelector('.service-card:nth-child(2)').addEventListener('click', () => {
+            modals.skipTracing.classList.add('active');
+        });
+
+        // Pricing card click handler
+        document.querySelector('.pricing-card').addEventListener('click', () => {
+            modals.pricing.classList.add('active');
+        });
+
+        // Testimonial card click handlers
+        document.querySelector('.testimonial-card:nth-child(1)').addEventListener('click', () => {
+            showTestimonialModal('agent');
+        });
+
+        document.querySelector('.testimonial-card:nth-child(2)').addEventListener('click', () => {
+            showTestimonialModal('brokerage');
+        });
+
+        document.querySelector('.testimonial-card:nth-child(3)').addEventListener('click', () => {
+            showTestimonialModal('teamlead');
+        });
+
+        document.querySelector('.testimonial-card:nth-child(4)').addEventListener('click', () => {
+            showTestimonialModal('investor');
+        });
+
+        document.querySelector('.testimonial-card:nth-child(5)').addEventListener('click', () => {
+            showTestimonialModal('realtor');
+        });
+
+        document.querySelector('.testimonial-card:nth-child(6)').addEventListener('click', () => {
+            showTestimonialModal('salesmanager');
+        });
+
+        // Function to show testimonial modal
+        function showTestimonialModal(type) {
+            const testimonial = testimonials[type];
+            document.getElementById('testimonialModalTitle').textContent = testimonial.title;
+            document.getElementById('testimonialModalSubtitle').textContent = testimonial.subtitle;
+            document.getElementById('testimonialModalBody').textContent = testimonial.body;
+            document.getElementById('testimonialModalAuthor').textContent = testimonial.author;
+            document.getElementById('testimonialModalDetails').innerHTML = testimonial.details;
+            modals.testimonial.classList.add('active');
+        }
+
+        // Close modal handlers
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.modal').classList.remove('active');
+            });
+        });
+
+        // Close modal on background click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+            }
+        });
+
+        // Pricing button interactions
+        document.querySelectorAll('.pricing-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent card click
+                const card = this.closest('.pricing-card');
+                const planName = card.querySelector('.plan-name').textContent;
+                const planPrice = card.querySelector('.plan-price').textContent;
+                
+                alert(`Service Plan Selected:\n\nPlan: ${planName}\nPrice: ${planPrice}\n\nTo get started with our services, please contact us at goleadrealty@gmail.com or fill out the contact form below.`);
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
