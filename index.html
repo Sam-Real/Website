@@ -433,7 +433,7 @@
             transition: all 0.6s ease;
         }
 
-        .fade-in.visible {
+        .fade-in.fade-in-visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -586,148 +586,6 @@
             position: absolute;
             left: 0;
             font-weight: bold;
-        }
-
-        /* Testimonials Section */
-        .testimonials {
-            padding: 100px 0;
-            background: var(--primary-dark);
-            position: relative;
-        }
-
-        .testimonials::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-gold), var(--accent-blue), var(--accent-teal));
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .testimonial-card {
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
-            transition: var(--transition);
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            cursor: pointer;
-            border: 1px solid rgba(243, 156, 18, 0.3);
-            background: var(--secondary-dark);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(243, 156, 18, 0.3);
-            border-color: rgba(243, 156, 18, 0.5);
-        }
-
-        .testimonial-card::after {
-            content: 'Click for Full Story';
-            position: absolute;
-            bottom: 1rem;
-            right: 1rem;
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
-            color: var(--white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            opacity: 0;
-            transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
-        }
-
-        .testimonial-card:hover::after {
-            opacity: 1;
-        }
-
-        .testimonial-card:nth-child(1) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/real-estate-agent.jpg') center/cover;
-        }
-
-        .testimonial-card:nth-child(2) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/brokerage-office.jpg') center/cover;
-        }
-
-        .testimonial-card:nth-child(3) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/team-meeting.jpg') center/cover;
-        }
-
-        .testimonial-card:nth-child(4) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/investor.jpg') center/cover;
-        }
-
-        .testimonial-card:nth-child(5) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/realtor.jpg') center/cover;
-        }
-
-        .testimonial-card:nth-child(6) {
-            background: linear-gradient(rgba(26, 26, 46, 0.6), rgba(26, 26, 46, 0.6)), url('images/sales-manager.jpg') center/cover;
-        }
-
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
-            flex-shrink: 0;
-            border: 3px solid var(--accent-gold);
-            background: linear-gradient(135deg, var(--accent-gold), var(--accent-blue));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.3);
-        }
-
-        .testimonial-avatar i {
-            font-size: 1.5rem;
-            color: var(--white);
-        }
-
-        .testimonial-content {
-            flex: 1;
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-size: 3rem;
-            color: var(--accent-gold);
-            opacity: 0.3;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .testimonial-text {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            font-style: italic;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-        }
-
-        .testimonial-author {
-            color: var(--accent-gold);
-            font-weight: 600;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
         /* Pricing Section */
@@ -1001,6 +859,18 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .service-card {
+                max-width: 100%;
+            }
+        }
+
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
@@ -1017,6 +887,7 @@
                 transition: 0.3s;
                 box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
                 padding: 2rem 0;
+                z-index: 1000;
             }
 
             .nav-menu.active {
@@ -1024,45 +895,275 @@
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.2;
+                padding: 0 1rem;
             }
 
             .hero p {
                 font-size: 1.1rem;
+                padding: 0 1rem;
             }
 
-            .properties-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .trust-badges {
-                gap: 2rem;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
+            .btn {
+                padding: 12px 25px;
+                font-size: 0.9rem;
             }
 
             .section-title h2 {
                 font-size: 2rem;
             }
 
-            .about h2 {
-                font-size: 2rem;
+            .section-title p {
+                font-size: 1rem;
+            }
+
+            .services-intro {
+                padding: 1.5rem;
+                margin: 0 auto 2rem;
+            }
+
+            .services-intro p {
+                font-size: 1rem;
+            }
+
+            .service-card {
+                margin: 0 1rem;
+            }
+
+            .service-content {
+                padding: 1.5rem;
+            }
+
+            .service-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .service-icon i {
+                font-size: 1.5rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .service-card h4 {
+                font-size: 1.1rem;
+            }
+
+            .service-card p {
+                font-size: 0.95rem;
+            }
+
+            .service-card ul li {
+                font-size: 0.9rem;
+            }
+
+            .pricing-card {
+                margin: 0 1rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-info {
+                padding: 1.5rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+                line-height: 1.1;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title p {
+                font-size: 0.95rem;
+            }
+
+            .services-intro {
+                padding: 1rem;
+                margin: 0 auto 1.5rem;
+            }
+
+            .services-intro p {
+                font-size: 0.95rem;
+            }
+
+            .service-card {
+                margin: 0 0.5rem;
+            }
+
+            .service-content {
+                padding: 1rem;
+            }
+
+            .service-icon {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 1rem;
+            }
+
+            .service-icon i {
+                font-size: 1.3rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .service-card h4 {
+                font-size: 1rem;
+            }
+
+            .service-card p {
+                font-size: 0.9rem;
+            }
+
+            .service-card ul li {
+                font-size: 0.85rem;
+                padding: 0.3rem 0;
+                padding-left: 1.2rem;
+            }
+
+            .pricing-card {
+                margin: 0 0.5rem;
+                padding: 1.5rem;
+            }
+
+            .plan-name {
+                font-size: 1.3rem;
             }
 
             .plan-price {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .pricing-card h4 {
+                font-size: 1rem;
+            }
+
+            .services-list li {
+                font-size: 0.85rem;
+                padding: 0.5rem 0;
+            }
+
+            .pricing-btn {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .contact-info {
+                padding: 1rem;
+            }
+
+            .contact-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .contact-info p {
+                font-size: 0.9rem;
+            }
+
+            .contact-item {
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                padding: 1rem;
+            }
+
+            .form-group label {
+                font-size: 0.9rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+
+            .footer-email {
+                font-size: 0.9rem;
+            }
+
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .service-card,
+            .pricing-card {
+                margin: 0 0.25rem;
+            }
+
+            .service-content,
+            .pricing-card {
+                padding: 0.75rem;
+            }
+
+            .service-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .service-icon i {
+                font-size: 1.1rem;
+            }
+
+            .plan-price {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -1075,7 +1176,6 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                 <li><a href="#pricing" class="nav-link">Pricing</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
@@ -1154,74 +1254,6 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-title fade-in">
-            <h2>Testimonials</h2>
-            <p>What our clients say about our services</p>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">Sam is consistent and professional. Sam's seller leads are well qualified and helped me stay focused on serious prospects.</p>
-                    <div class="testimonial-author">- Real Estate Agent</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">Sam played a key role in supporting our agent recruiting efforts through consistent and professional cold calling. Sam connected with licensed agents, introduced our brokerage opportunities clearly, and helped generate meaningful conversations that led to real recruiting opportunities. Reliable, hardworking, and easy to work with - a valuable part of our growth process.</p>
-                    <div class="testimonial-author">- Brokerage Owner</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">What impressed me about Sam is how Sam takes feedback and turns it into action. By evolving scripts, Sam's creating real value for clients. That's why I'll give Sam another opportunity.</p>
-                    <div class="testimonial-author">- Team Lead</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">Working with Sam has been a smooth experience. Sam's cold calling consistently connects me with motivated sellers. Sam's dependable and delivers results.</p>
-                    <div class="testimonial-author">- Investor</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">Reliable and easy to work with. Sam handled follow-ups professionally and helped me generate new opportunities.</p>
-                    <div class="testimonial-author">- Realtor</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                <div class="testimonial-content">
-                    <p class="testimonial-text">Dedicated and consistent with outreach. Sam understands how to qualify sellers and buyers and provide useful information.</p>
-                    <div class="testimonial-author">- Sales Manager</div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
         <div class="section-title fade-in">
@@ -1413,25 +1445,10 @@
                 
                 <h3>Contact Information:</h3>
                 <ul>
-                    <li>Email: goleadrealty@gmail.com</li>
+                    <li>Email: goleadrealtybpo@gmail.com</li>
                     <li>Phone: +1 (555) 123-4567</li>
                     <li>Available: Monday-Friday, 9AM-6PM EST</li>
                 </ul>
-            </div>
-        </div>
-    </div>
-
-    <div id="testimonialModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="modal-header">
-                <h2 id="testimonialModalTitle"></h2>
-                <p id="testimonialModalSubtitle"></p>
-            </div>
-            <div class="modal-body">
-                <p id="testimonialModalBody"></p>
-                <h3 id="testimonialModalAuthor"></h3>
-                <div id="testimonialModalDetails"></div>
             </div>
         </div>
     </div>
@@ -1448,7 +1465,7 @@
                     <div class="contact-details">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>goleadrealty@gmail.com</span>
+                            <span>goleadrealtybpo@gmail.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
@@ -1485,7 +1502,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">GoLeadRealty</div>
-                <div class="footer-email">goleadrealty@gmail.com</div>
+                <div class="footer-email">goleadrealtybpo@gmail.com</div>
                 <div class="social-icons">
                     <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -1500,18 +1517,21 @@
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         // Mobile Navigation Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
 
         hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
         // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
@@ -1535,190 +1555,20 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.classList.add('fade-in-visible');
                 }
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
-        });
-
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
-            
-            // Simple success message (in real implementation, this would send to a server)
-            alert(`Thank you for your message, ${formData.name}! We will get back to you soon at ${formData.email}.`);
-            
-            // Reset form
-            document.getElementById('contactForm').reset();
         });
 
         // Modal functionality
         const modals = {
             coldCalling: document.getElementById('coldCallingModal'),
             skipTracing: document.getElementById('skipTracingModal'),
-            pricing: document.getElementById('pricingModal'),
-            testimonial: document.getElementById('testimonialModal')
-        };
-
-        // Testimonial data
-        const testimonials = {
-            agent: {
-                title: "Real Estate Agent Testimonial",
-                subtitle: "Consistent and Professional Service",
-                body: "Working with Sam has been a game-changer for my real estate business. Sam's cold calling services are consistent and professional, delivering well-qualified seller leads that help me stay focused on serious prospects. Sam understands the real estate market and knows how to identify motivated sellers.",
-                author: "Sarah Johnson - Real Estate Agent",
-                details: `
-                    <h3>Results Achieved:</h3>
-                    <ul>
-                        <li>50% increase in qualified leads</li>
-                        <li>30% reduction in time spent on prospecting</li>
-                        <li>25% more appointments scheduled per month</li>
-                        <li>Improved lead-to-conversion ratio</li>
-                    </ul>
-                    <h3>What I Loved:</h3>
-                    <ul>
-                        <li>Professional communication style</li>
-                        <li>Thorough lead qualification process</li>
-                        <li>Consistent follow-up on all prospects</li>
-                        <li>Great CRM integration</li>
-                        <li>Weekly performance reports</li>
-                    </ul>
-                    <h3>Duration:</h3>
-                    <p>Working together for 8 months with excellent results and ROI.</p>
-                `
-            },
-            brokerage: {
-                title: "Brokerage Owner Testimonial",
-                subtitle: "Agent Recruitment Support",
-                body: "Sam played a key role in supporting our agent recruiting efforts through consistent and professional cold calling. Sam connected with licensed agents, introduced our brokerage opportunities clearly, and helped generate meaningful conversations that led to real recruiting opportunities. Reliable, hardworking, and easy to work with - a valuable part of our growth process.",
-                author: "Michael Chen - Brokerage Owner",
-                details: `
-                    <h3>Recruitment Results:</h3>
-                    <ul>
-                        <li>15 new agents recruited in 6 months</li>
-                        <li>40% increase in recruitment efficiency</li>
-                        <li>Professional representation of our brand</li>
-                        <li>Consistent pipeline of qualified candidates</li>
-                    </ul>
-                    <h3>Services Provided:</h3>
-                    <ul>
-                        <li>Agent outreach and qualification</li>
-                        <li>Brokerage opportunity presentation</li>
-                        <li>Interview scheduling</li>
-                        <li>Follow-up with interested candidates</li>
-                        <li>CRM management for recruitment</li>
-                    </ul>
-                    <h3>Impact:</h3>
-                    <p>Helped grow our brokerage from 25 to 40 agents in just 6 months.</p>
-                `
-            },
-            teamlead: {
-                title: "Team Lead Testimonial",
-                subtitle: "Adaptive and Responsive Service",
-                body: "What impressed me about Sam is how Sam takes feedback and turns it into action. By evolving scripts and approaches based on our input, Sam's creating real value for clients. Sam's ability to adapt and improve based on feedback is why I'll continue working with Sam.",
-                author: "David Martinez - Team Lead",
-                details: `
-                    <h3>Adaptability Highlights:</h3>
-                    <ul>
-                        <li>Quick implementation of feedback</li>
-                        <li>Continuous script optimization</li>
-                        <li>Responsive to market changes</li>
-                        <li>Proactive approach to improvements</li>
-                    </ul>
-                    <h3>Process Improvements:</h3>
-                    <ul>
-                        <li>Weekly strategy reviews</li>
-                        <li>A/B testing of calling approaches</li>
-                        <li>Custom script development</li>
-                        <li>Performance tracking and optimization</li>
-                    </ul>
-                    <h3>Collaboration:</h3>
-                    <p>Excellent communication and partnership in refining our outreach strategy.</p>
-                `
-            },
-            investor: {
-                title: "Investor Testimonial",
-                subtitle: "Smooth and Reliable Service",
-                body: "Working with Sam has been a smooth experience. Sam's cold calling consistently connects me with motivated sellers. Sam's dependable and delivers results, helping me find investment opportunities that align with my criteria.",
-                author: "Jennifer Williams - Real Estate Investor",
-                details: `
-                    <h3>Investment Results:</h3>
-                    <ul>
-                        <li>12 deals closed in 10 months</li>
-                        <li>$2.5M in property acquisitions</li>
-                        <li>Consistent deal flow pipeline</li>
-                        <li>High-quality off-market opportunities</li>
-                    </ul>
-                    <h3>Target Properties:</h3>
-                    <ul>
-                        <li>Single-family homes</li>
-                        <li>Multi-family properties</li>
-                        <li>Distressed properties</li>
-                        <li>Off-market deals</li>
-                    </ul>
-                    <h3>ROI:</h3>
-                    <p>Excellent return on investment with consistent deal flow and quality leads.</p>
-                `
-            },
-            realtor: {
-                title: "Realtor Testimonial",
-                subtitle: "Professional Follow-up Management",
-                body: "Reliable and easy to work with. Sam handled follow-ups professionally and helped me generate new opportunities. Sam's systematic approach to lead nurturing has made a significant difference in my business.",
-                author: "Robert Thompson - Realtor",
-                details: `
-                    <h3>Follow-up Excellence:</h3>
-                    <ul>
-                        <li>Systematic lead nurturing process</li>
-                        <li>Professional follow-up cadence</li>
-                        <li>Consistent communication</li>
-                        <li>Effective lead conversion</li>
-                    </ul>
-                    <h3>Business Impact:</h3>
-                    <ul>
-                        <li>35% increase in lead conversion</li>
-                        <li>Improved client relationships</li>
-                        <li>Better time management</li>
-                        <li>More closed transactions</li>
-                    </ul>
-                    <h3>Service Quality:</h3>
-                    <p>Outstanding follow-up management that has transformed my business operations.</p>
-                `
-            },
-            salesmanager: {
-                title: "Sales Manager Testimonial",
-                subtitle: "Dedicated and Consistent Performance",
-                body: "Dedicated and consistent with outreach. Sam understands how to qualify sellers and buyers and provide useful information. Sam's thorough approach and consistency have made Sam an invaluable partner.",
-                author: "Lisa Anderson - Sales Manager",
-                details: `
-                    <h3>Performance Metrics:</h3>
-                    <ul>
-                        <li>Consistent daily call volume</li>
-                        <li>High qualification standards</li>
-                        <li>Excellent data accuracy</li>
-                        <li>Strong conversion rates</li>
-                    </ul>
-                    <h3>Professional Integration:</h3>
-                    <ul>
-                        <li>Seamless CRM integration</li>
-                        <li>Great collaboration</li>
-                        <li>Professional communication</li>
-                        <li>Reliable reporting</li>
-                    </ul>
-                    <h3>Partnership Value:</h3>
-                    <p>Exceptional partner who consistently delivers high-quality results.</p>
-                `
-            }
+            pricing: document.getElementById('pricingModal')
         };
 
         // Service card click handlers
@@ -1734,42 +1584,6 @@
         document.querySelector('.pricing-card').addEventListener('click', () => {
             modals.pricing.classList.add('active');
         });
-
-        // Testimonial card click handlers
-        document.querySelector('.testimonial-card:nth-child(1)').addEventListener('click', () => {
-            showTestimonialModal('agent');
-        });
-
-        document.querySelector('.testimonial-card:nth-child(2)').addEventListener('click', () => {
-            showTestimonialModal('brokerage');
-        });
-
-        document.querySelector('.testimonial-card:nth-child(3)').addEventListener('click', () => {
-            showTestimonialModal('teamlead');
-        });
-
-        document.querySelector('.testimonial-card:nth-child(4)').addEventListener('click', () => {
-            showTestimonialModal('investor');
-        });
-
-        document.querySelector('.testimonial-card:nth-child(5)').addEventListener('click', () => {
-            showTestimonialModal('realtor');
-        });
-
-        document.querySelector('.testimonial-card:nth-child(6)').addEventListener('click', () => {
-            showTestimonialModal('salesmanager');
-        });
-
-        // Function to show testimonial modal
-        function showTestimonialModal(type) {
-            const testimonial = testimonials[type];
-            document.getElementById('testimonialModalTitle').textContent = testimonial.title;
-            document.getElementById('testimonialModalSubtitle').textContent = testimonial.subtitle;
-            document.getElementById('testimonialModalBody').textContent = testimonial.body;
-            document.getElementById('testimonialModalAuthor').textContent = testimonial.author;
-            document.getElementById('testimonialModalDetails').innerHTML = testimonial.details;
-            modals.testimonial.classList.add('active');
-        }
 
         // Close modal handlers
         document.querySelectorAll('.modal-close').forEach(btn => {
@@ -1796,6 +1610,32 @@
             }
         });
 
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Create mailto link with form data
+            const subject = encodeURIComponent(`New Contact Form Message from ${formData.name}`);
+            const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+            const mailtoLink = `mailto:goleadrealtybpo@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            setTimeout(() => {
+                alert(`Thank you ${formData.name}! Your email client has been opened with your message. Please send it to contact us.`);
+                document.getElementById('contactForm').reset();
+            }, 1000);
+        });
+
         // Pricing button interactions
         document.querySelectorAll('.pricing-btn').forEach(btn => {
             btn.addEventListener('click', function(e) {
@@ -1804,7 +1644,7 @@
                 const planName = card.querySelector('.plan-name').textContent;
                 const planPrice = card.querySelector('.plan-price').textContent;
                 
-                alert(`Service Plan Selected:\n\nPlan: ${planName}\nPrice: ${planPrice}\n\nTo get started with our services, please contact us at goleadrealty@gmail.com or fill out the contact form below.`);
+                alert(`Service Plan Selected:\n\nPlan: ${planName}\nPrice: ${planPrice}\n\nTo get started with our services, please contact us at goleadrealtybpo@gmail.com or fill out the contact form below.`);
             });
         });
 
